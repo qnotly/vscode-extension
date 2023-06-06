@@ -3,6 +3,8 @@
   "displayName": "Qnotly",
   "description": "The Power To Note Everything",
   "version": "0.1.0",
+  "publisher": "Qnotly",
+  "icon": "images/icon.png",
   "author": {
     "name": "Hady Eslam",
     "email": "abdoaslam000@gmail.com",
@@ -75,7 +77,7 @@
     "test": "node ./test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.78.0",
+    "@types/vscode": "^1.71.0",
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "16.x",
