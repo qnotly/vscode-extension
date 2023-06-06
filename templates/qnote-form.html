@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>hljs.highlightAll();</script>
+
+    <style>
+      /* * {
+        box-sizing: border-box;
+      } */
+
+      body {
+        padding: 0px;
+      }
+
+      textarea {
+        width: 90%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+        background-color: transparent;
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+      }
+
+      input[type=submit] {
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+      }
+
+      .container {
+        border-radius: 5px;
+        padding: 20px;
+      }
+
+      .col-25 {
+        float: left;
+        width: 100%;
+        margin-top: 6px;
+      }
+
+      .col-75 {
+        float: left;
+        width: 100%;
+        margin-top: 6px;
+      }
+
+      .row::after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      @media screen and (max-width: 2000px) {
+        .col-25, .col-75, input[type=submit] {
+          width: 100%;
+          margin-top: 0;
+        }
+      }
+
+      .save-qnote-button {
+        appearance: none;
+        backface-visibility: hidden;
+        background-color: #2f80ed;
+        border-radius: 10px;
+        border-style: none;
+        box-shadow: none;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+        font-size: 15px;
+        font-weight: 500;
+        height: 50px;
+        letter-spacing: normal;
+        line-height: 1.5;
+        outline: none;
+        overflow: hidden;
+        padding: 14px 30px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        transform: translate3d(0, 0, 0);
+        transition: all .3s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: top;
+        white-space: nowrap;
+      }
+
+      .save-qnote-button:hover {
+        background-color: #1366d6;
+        box-shadow: rgba(0, 0, 0, .05) 0 5px 30px, rgba(0, 0, 0, .05) 0 1px 4px;
+        opacity: 1;
+        transform: translateY(0);
+        transition-duration: .35s;
+      }
+
+      .save-qnote-button:hover:after {
+        opacity: .5;
+      }
+
+      .save-qnote-button:active {
+        box-shadow: rgba(0, 0, 0, .1) 0 3px 6px 0, rgba(0, 0, 0, .1) 0 0 10px 0, rgba(0, 0, 0, .1) 0 1px 4px -1px;
+        transform: translateY(2px);
+        transition-duration: .35s;
+      }
+
+      .save-qnote-button:active:after {
+        opacity: 1;
+      }
+
+      @media (min-width: 768px) {
+        .save-qnote-button {
+          padding: 14px 22px;
+          width: 176px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+      <h2 style="text-align: center;">Save QNote</h2>
+      <form id="save-qnote-form">
+        <div class="row">
+          <div class="col-75">
+            <textarea id="qnote" name="subject" placeholder="Write Your QNote.." style="height:100px"></textarea>
+          </div>
+        </div>
+        <br>
+        <pre><code class="language-{{language}}">{{{code}}}</code></pre>
+        <br>
+        <div class="row">
+          <input type="submit" value="Save QNote" class="save-qnote-button" id="save-qnote">
+        </div>
+      </form>
+    </div>
+
+    <script>
+      const vscode = acquireVsCodeApi();
+      document.addEventListener('DOMContentLoaded', (event) => {
+
+        document.getElementById('save-qnote-form').onsubmit = (event) => {
+          document.getElementById('save-qnote').value = 'Saving...';
+          event.preventDefault();
+          qnote = document.getElementById('qnote').value;
+          vscode.postMessage({
+            "event": "saveQNote",
+            "data": {
+              "qnote": qnote
+            }
+          });
+          document.getElementById('save-qnote').value = 'Saved';
+        }
+      });
+    </script>
+
+  </body>
+</html>

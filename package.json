@@ -1,0 +1,92 @@
+{
+  "name": "qnotly",
+  "displayName": "Qnotly",
+  "description": "The Power To Note Everything",
+  "version": "0.1.0",
+  "author": {
+    "name": "Hady Eslam",
+    "email": "abdoaslam000@gmail.com",
+    "url": "https://github.com/Hady-Eslam"
+  },
+  "homepage": "https://github.com/qnotly/vscode-extension",
+  "keywords": [
+    "qnotly", "vscode", "vscode-extension", "extension", "notes", "note", "qnote"
+  ],
+  "license": "MIT",
+  "maintainers": [
+    "Hady Eslam"
+  ],
+  "repository": {
+    "url": "https://github.com/qnotly/vscode-extension"
+  },
+  "engines": {
+    "vscode": "^1.71.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "qnotly.saveQNote",
+        "title": "Qnotly: Save QNote"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "qnotly.saveQNote",
+          "when": "editorTextFocus"
+        }
+      ]
+    },
+    "views": {
+      "qnotly-explorer": [
+        {
+          "id": "qnotly-explorer-id",
+          "name": "Qnotly",
+          "type": "webview"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "qnotly-explorer-id",
+        "contents": "Hello From Qnotly, Your Code Notes Extension."
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "qnotly-explorer",
+          "title": "Qnotly",
+          "icon": "$(output)"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.78.0",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "eslint": "^8.39.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.0.4",
+    "@vscode/test-electron": "^2.3.0"
+  },
+  "dependencies": {
+    "highlight.js": "^11.8.0",
+    "mustache": "^4.2.0"
+  }
+}
