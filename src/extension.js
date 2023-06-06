@@ -26,11 +26,15 @@ async function activate(context) {
 	vscode.window.registerWebviewViewProvider("qnotly-explorer-id", qnotly_web_provider);
 
 	// Show Current Related File QNotes
-	qnotly_web_provider.showFileRelatedQNotes(vscode.window.activeTextEditor.document.fileName);
+	if (vscode.window.activeTextEditor !== undefined) {
+		qnotly_web_provider.showFileRelatedQNotes(vscode.window.activeTextEditor.document.fileName);
+	}
 
 	// Change Related QNotes On Text Editor Change
 	vscode.window.onDidChangeActiveTextEditor(e => {
-		qnotly_web_provider.showFileRelatedQNotes(e.document.fileName);
+		if (e !== undefined){
+			qnotly_web_provider.showFileRelatedQNotes(e.document.fileName);
+		}
 	});
 }
 

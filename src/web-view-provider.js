@@ -108,23 +108,25 @@ module.exports = class QnotlyWebViewProvider {
           enableScripts: true
         };
 
-        webviewView.webview.html = this.__get_qnotes_template(
-          vscode.window.activeTextEditor.document.fileName
-        );
-
-        this._webviewView.webview.onDidReceiveMessage(message => {
-          let file_path = vscode.window.activeTextEditor.document.fileName;
-
-          if (message.event == 'saveQNote') {
-            this._storage.setQNote(
-              message.data.qnote, this.__get_selected_text(), file_path, this.__get_selected_lines()
-            );
-          }
-          else if (message.event == 'deleteQNote') {
-            this._storage.deleteQNote(message.data.qnoteId);
-          }
-          this._webviewView.webview.html = this.__get_qnotes_template(file_path);
-        })
+        if (vscode.window.activeTextEditor !== undefined){
+          webviewView.webview.html = this.__get_qnotes_template(
+            vscode.window.activeTextEditor.document.fileName
+          );
+  
+          this._webviewView.webview.onDidReceiveMessage(message => {
+            let file_path = vscode.window.activeTextEditor.document.fileName;
+  
+            if (message.event == 'saveQNote') {
+              this._storage.setQNote(
+                message.data.qnote, this.__get_selected_text(), file_path, this.__get_selected_lines()
+              );
+            }
+            else if (message.event == 'deleteQNote') {
+              this._storage.deleteQNote(message.data.qnoteId);
+            }
+            this._webviewView.webview.html = this.__get_qnotes_template(file_path);
+          })
+        }
       }
     }
 }
