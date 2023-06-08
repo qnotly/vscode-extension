@@ -1,4 +1,4 @@
-# QNotly README
+# QNotly
 
 QNotly, is a vscode extension to take code notes, by highliting the code you want, then save it, and show notes related in every file in the currrent workspace.
 
@@ -15,15 +15,9 @@ QNotly, is a vscode extension to take code notes, by highliting the code you wan
 
 
 ---
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-
----
 ## Release Notes
 
-### 0.1.0
+### 0.1.4
 Initial Release of QNotly, VSCode Extension.
 What's New
 1. Save Code QNote
