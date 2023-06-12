@@ -45,6 +45,14 @@ Distributed under the MIT License. See `LICENSE` for more information.
 See `CODE_OF_CONDUCT.md` for more information.
 
 
+## Security
+See `SECURITY.md` for more information.
+
+
+## Changelog
+All Qnotly changes and releases notes. See `CHANGELOG.md` for more information.
+
+
 ---
 ## Release Notes
 
