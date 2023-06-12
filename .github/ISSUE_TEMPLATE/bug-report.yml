@@ -28,7 +28,7 @@ body:
 
   - type: textarea
     validations:
-      required: true
+      required: false
     attributes:
       label: Node Environment
       description: |
@@ -37,7 +37,7 @@ body:
 
   - type: textarea
     validations:
-      required: true
+      required: false
     attributes:
       label: Npm Version
       description: |
@@ -74,7 +74,7 @@ body:
       label: Expected Behavior
       description: A concise description of what you expected to happen.
     validations:
-      required: true
+      required: false
 
   - type: textarea
     attributes:
