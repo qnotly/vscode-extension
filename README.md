@@ -37,6 +37,11 @@ Qnotly, is a vscode extension to take code notes, by highliting the code you wan
 
 
 ---
+## License
+Distributed under the MIT License. See `LICENSE` for more information.
+
+
+---
 ## Release Notes
 
 ### 0.1.4
