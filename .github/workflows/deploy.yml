@@ -10,6 +10,7 @@ on:
 jobs:
   marketplace_deployment:
     name: Deploy To Marketplace
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
