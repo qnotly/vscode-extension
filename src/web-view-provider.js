@@ -155,6 +155,11 @@ module.exports = class QnotlyWebViewProvider {
         })
 
         if (vscode.window.activeTextEditor !== undefined){
+          webviewView.webview.html = this.__get_qnotes_template(
+            vscode.window.activeTextEditor.document.fileName
+          );
+        }
+        else{
           webviewView.webview.html = this.__get_all_qnotes_templates();
         }
       }
