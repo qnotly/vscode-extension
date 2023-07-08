@@ -38,6 +38,31 @@ module.exports = class QnotlyWebViewProvider {
       };
     }
 
+    __get_all_qnotes_templates(){
+      let qnotes = this._storage.getAllQnotes();
+
+      const _qnotes = qnotes.map(qnote => {
+
+        const extension = qnote.file.split('.').pop();
+        let language = (hljs.getLanguage(extension) === undefined) ? 'plaintext': extension;
+
+        const _qnote_message = qnote.qnote.split('\n').map(line => `<span>${line}</span><br>`).join('');
+        return {
+          qnote: _qnote_message,
+          shortFilePath: '.../' + qnote.file.split('/').pop(),
+          file: qnote.file,
+          language: language,
+          code: hljs.highlight(qnote.code, {language: language}).value,
+          qnoteId: qnote._id
+        }
+      });
+
+      let template = mustache.render(this._file_provider.load_template('qnotes'), {
+        qnotes: _qnotes
+      });
+      return template;
+    }
+
     __get_qnotes_template(file_path){
       const extension = file_path.split('.').pop();
       let language = (hljs.getLanguage(extension) === undefined) ? 'plaintext': extension;
@@ -47,6 +72,8 @@ module.exports = class QnotlyWebViewProvider {
         const _qnote_message = qnote.qnote.split('\n').map(line => `<span>${line}</span><br>`).join('');
         return {
           qnote: _qnote_message,
+          file: qnote.file,
+          shortFilePath: '.../' + qnote.file.split('/').pop(),
           language: language,
           code: hljs.highlight(qnote.code, {language: language}).value,
           qnoteId: qnote._id
@@ -119,6 +146,11 @@ module.exports = class QnotlyWebViewProvider {
           else if (message.event == 'deleteQNote') {
             this._storage.deleteQNote(message.data.qnoteId);
           }
+          else if (message.event == "showAllQnotes"){
+            this._webviewView.webview.html = this.__get_all_qnotes_templates();
+            return;
+          }
+          else if (message.event == "showFileQnotes") {}
           this._webviewView.webview.html = this.__get_qnotes_template(file_path);
         })
 
@@ -126,6 +158,9 @@ module.exports = class QnotlyWebViewProvider {
           webviewView.webview.html = this.__get_qnotes_template(
             vscode.window.activeTextEditor.document.fileName
           );
+        }
+        else{
+          webviewView.webview.html = this.__get_all_qnotes_templates();
         }
       }
     }
