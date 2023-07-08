@@ -4,15 +4,12 @@
 Qnotly, is a vscode extension to take code notes, by highliting the code you want, then save it, and show notes related in every file in the currrent workspace.
 
 ## Features
+1. Create Qnote.
+2. List File Qnotes When clicking on file.
+3. Delete Qnote.
+4. List All Qnotes in Currennt Workspace
 
-1. Save Qnote:
-![Add Qnotes](images/AddQNotes.gif)
-
-2. List Qnote:
-![Show File Qnotes](images/ShowQNotes.gif)
-
-3. Delete Qnote
-![Delete Qnote](images/DeleteQNote.gif)
+![Full Intro](images/FullIntro.gif)
 
 
 ---
@@ -30,10 +27,16 @@ Qnotly, is a vscode extension to take code notes, by highliting the code you wan
     ```
 * Run Project Using `F5`.
 
+### VSCode Marketplace
+Search marketplace by word `qnotly` or `Qnotly`, it should show extension to download.
+[Qnotly in Marketplace Link](https://marketplace.visualstudio.com/items?itemName=Qnotly.qnotly)
+
 
 ---
 ## Contact
 * Email: `abdoaslam000@gmail.com`
+
+Do not hasitate to contact me.
 
 
 ---
@@ -56,11 +59,10 @@ All Qnotly changes and releases notes. See `CHANGELOG.md` for more information.
 ---
 ## Release Notes
 
-### 0.1.4
-Initial Release of QNotly, VSCode Extension.
-What's New
-1. Save Code Qnote
-2. Show File Qnotes
-3. Delete Qnote
+### 0.6.0
+### Added
+- Show all qnotes button
+- Show current file qnotes
+- Show Qnote file and it's tooltip for full file path
 
 **Enjoy!**

@@ -76,6 +76,13 @@ module.exports = class QNotlyStorage {
         return qnotes;
     }
 
+    getAllQnotes() {
+        let workspace = this._storage.get(`qnotly-workspace-${this._current_workspace._id}`, {
+            qnotes: []
+        });
+        return workspace.qnotes;
+    }
+
     async deleteQNote(qnoteId) {
         let qnotes = [];
         let workspace = this._storage.get(`qnotly-workspace-${this._current_workspace._id}`, {

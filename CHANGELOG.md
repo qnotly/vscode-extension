@@ -15,3 +15,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [0.1.5] - 14-6-2023
 ### Added
 - Github Action to deloy to vscode marketplace
+
+## [0.6.0] - 8-7-2023
+### Added
+- Show all qnotes button
+- Show current file qnotes
+- Show Qnote file and it's tooltip for full file path

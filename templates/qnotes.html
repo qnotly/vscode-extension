@@ -29,18 +29,16 @@
             margin-bottom: 80px;
         }
         body {
-            /* background-color: rgb(74, 76, 78); */
             color: #ccc;
         }
         .one {
-            margin-bottom: 50px;
+            margin-bottom: 30px;
         }
         .one h1 {
             text-align: center;
-            /* text-transform: uppercase; */
             padding-bottom: 5px;
-            }
-            .one h1:before {
+        }
+        .one h1:before {
             width: 28px;
             height: 5px;
             display: block;
@@ -50,8 +48,8 @@
             left: 50%;
             margin-left: -14px;
             background-color: #727373;
-            }
-            .one h1:after {
+        }
+        .one h1:after {
             width: 100px;
             height: 1px;
             display: block;
@@ -61,64 +59,108 @@
             left: 50%;
             margin-left: -50px;
             background-color: #727373;
-            }
-            h1 {
-                position: relative;
-                padding: 0;
-                margin: 0;
-                font-family: "Raleway", sans-serif;
-                font-weight: 300;
-                font-size: 40px;
-                color: #fff;
-                -webkit-transition: all 0.4s ease 0s;
-                -o-transition: all 0.4s ease 0s;
-                transition: all 0.4s ease 0s;
-                }
+        }
+        h1 {
+            position: relative;
+            padding: 0;
+            margin: 0;
+            font-family: "Raleway", sans-serif;
+            font-weight: 300;
+            font-size: 40px;
+            color: #fff;
+            -webkit-transition: all 0.4s ease 0s;
+            -o-transition: all 0.4s ease 0s;
+            transition: all 0.4s ease 0s;
+        }
 
-                h1 span {
-                display: block;
-                font-size: 0.5em;
-                line-height: 1.3;
-                }
-                h1 em {
-                font-style: normal;
-                font-weight: 600;
-                }
-                .actions {
-                    float: right;
-                    vertical-align: middle;
-                    max-width: 100px;
-                }
-                .actions:hover {
-                    cursor: pointer;
-                }
-                .action-link{
-                    /* width: 10px; */
-                    display: block;
-                    margin-top: 10px;
-                    color: #3794ff;
-                    /* padding-left: 60px; */
-                    /* margin-bottom: 8px; */
-                    /* font-size: x-large; */
-                }
-                .action-link:hover {
-                    color: red;
-                }
-                .side-title {
-                    float: left;
-                    margin-top: 7px;
-                }
-                .dropdown-actions{
-                    position: relative;
-                    max-width: 100px;
-                    margin-left: 30px;
-                    /* display: none; */
-                    background-color: #727373;
-                }
-                .dropdown-actions a{
-                    height: 25px;
-                    color: red;
-                }
+        h1 span {
+            display: block;
+            font-size: 0.5em;
+            line-height: 1.3;
+        }
+        h1 em {
+            font-style: normal;
+            font-weight: 600;
+        }
+        .actions {
+            float: right;
+            vertical-align: middle;
+            max-width: 100px;
+        }
+        .actions:hover {
+            cursor: pointer;
+        }
+        .action-link{
+            display: block;
+            margin-top: 10px;
+            color: #3794ff;
+        }
+        .action-link:hover {
+            color: red;
+        }
+        .side-title {
+            float: left;
+            margin-top: 7px;
+        }
+        .dropdown-actions{
+            position: relative;
+            max-width: 100px;
+            margin-left: 30px;
+            background-color: #727373;
+        }
+        .dropdown-actions a{
+            height: 25px;
+            color: red;
+        }
+
+        .show-all-qnotes-button{
+            margin-bottom: 10px;
+            display: block;
+            width: fit-content;
+        }
+        .show-all-qnotes-button:hover{
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .qnote-file{
+            overflow-wrap: break-word;
+            padding-bottom: 5px;
+        }
+        .show-file-qnotes-button{
+            margin-bottom: 20px;
+            display: block;
+            width: fit-content;
+        }
+        .show-file-qnotes-button:hover{
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .qnote-file p{
+            text-overflow: ellipsis;
+        }
+
+        .tooltiptext {
+            visibility: hidden;
+            width: 80%;
+            margin-top: -2px;
+            margin-left: -10px;
+            background-color: black;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            overflow-wrap: break-word;
+        }
+        .qnote-file:hover .tooltiptext {
+           visibility: visible;
+        }
+        @media screen and (min-width: 140px) {
+            .tooltiptext{
+                margin-left: -10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -126,13 +168,20 @@
         <h1>QNotes</h1>
     </div>
 
+    <a class="show-all-qnotes-button" onclick="showAllQnotes()">Show All Qnotes</a>
+    <a class="show-file-qnotes-button" onclick="showFileQnotes()">Show This File Qnotes</a>
+
     {{#qnotes}}
     <div class="block">
-        <div style="height: 40px;">
+        <div style="height: 30px;">
             <h3 class="side-title">QNote</h3>
             <div class="actions">
                 <a class="action-link" onclick="showDropdown({{qnoteId}})">Delete</a>
             </div>
+        </div>
+        <div class="qnote-file">
+            <p>{{{shortFilePath}}}</p>
+            <span class="tooltiptext">{{{file}}}</span>
         </div>
         <div class="box box1">
             {{{qnote}}}
@@ -150,6 +199,18 @@
                     "qnoteId": qnoteId
                 }
             });
+        }
+
+        async function showAllQnotes(){
+            vscode.postMessage({
+                "event": "showAllQnotes"
+            })
+        }
+
+        async function showFileQnotes(){
+            vscode.postMessage({
+                "event": "showFileQnotes"
+            })
         }
     </script>
 
